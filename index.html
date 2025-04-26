@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pro Calculator Hub</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Calculator Tools</h1>
+  </header>
+   
+  <div id="mainContent"> <!-- Wrap main content -->
+    <div class="content-wrapper">
+      <main id="toolsContainer">
+        <div class="tool-card" onclick="openCalculator('basicCalculator')">
+          <h3>➕ Basic Calculator</h3>
+          <p>Perform basic arithmetic operations like addition, subtraction, multiplication, and division.</p>
+        </div>
+        <div class="tool-card" onclick="openCalculator('scientificCalculator')">
+          <h3>🧪 Scientific Calculator</h3>
+          <p>Perform advanced calculations like trigonometry, logarithms, and more.</p>
+        </div>
+        <div class="tool-card" onclick="openCalculator('ageCalculator')">
+          <h3>🎂 Age Calculator</h3>
+          <p>Calculate your age based on your birth date.</p>
+        </div>
+        <div class="tool-card" onclick="openCalculator('currencyConverter')">
+          <h3>💱 Currency Converter</h3>
+          <p>Convert between different currencies with ease.</p>
+        </div>
+        <div class="tool-card" onclick="openCalculator('bmiCalculator')">
+          <h3>🧍 BMI Calculator</h3>
+          <p>Calculate your Body Mass Index (BMI) based on your weight and height.</p>
+        </div>
+        <div class="tool-card" onclick="openCalculator('temperatureConverter')">
+          <h3>🌡️ Temperature Converter</h3>
+          <p>Convert temperatures between Celsius, Fahrenheit, and Kelvin.</p>
+        </div>
+        <div class="tool-card" onclick="openCalculator('lengthConverter')">
+          <h3>📏 Length Converter</h3>
+          <p>Convert lengths between meters, kilometers, feet, and miles.</p>
+        </div>
+        <div class="tool-card" onclick="openCalculator('weightConverter')">
+          <h3>⚖️ Weight Converter</h3>
+          <p>Convert weights between kilograms, pounds, and grams.</p>
+        </div>
+        <div class="tool-card" onclick="openCalculator('dateDifferenceCalculator')">
+          <h3>📅 Date Difference Calculator</h3>
+          <p>Calculate the difference in days, months, or years between two dates.</p>
+        </div>
+        <div class="tool-card" onclick="openCalculator('discountCalculator')">
+          <h3>💸 Discount Calculator</h3>
+          <p>Calculate the final price and savings based on the original price and discount percentage.</p>
+        </div>
+        <div class="tool-card" onclick="openCalculator('loanCalculator')">
+          <h3>🏦 Loan/EMI Calculator</h3>
+          <p>Calculate monthly payments and total interest for loans.</p>
+        </div>
+        <div class="tool-card" onclick="openCalculator('unitConverter')">
+          <h3>🔄 Unit Converter</h3>
+          <p>Convert units like speed, area, volume, and data sizes.</p>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal for each Calculator -->
+  <div id="calculatorModal" class="modal">
+    <span class="close" onclick="closeCalculator()">×</span>
+    
+    <!-- Basic Calculator -->
+    <div id="basicCalculator" class="calculator-tool">
+      <h2>Basic Calculator</h2>
+      <input type="text" id="basicInput" disabled />
+      <div class="buttons">
+        <button onclick="appendToBasicInput('1')">1</button>
+        <button onclick="appendToBasicInput('2')">2</button>
+        <button onclick="appendToBasicInput('3')">3</button>
+        <button onclick="appendToBasicInput('+')">+</button>
+        <button onclick="appendToBasicInput('4')">4</button>
+        <button onclick="appendToBasicInput('5')">5</button>
+        <button onclick="appendToBasicInput('6')">6</button>
+        <button onclick="appendToBasicInput('-')">-</button>
+        <button onclick="appendToBasicInput('7')">7</button>
+        <button onclick="appendToBasicInput('8')">8</button>
+        <button onclick="appendToBasicInput('9')">9</button>
+        <button onclick="appendToBasicInput('*')">*</button>
+        <button onclick="appendToBasicInput('0')">0</button>
+        <button 
+          id="deleteButton" 
+          onmousedown="handleDeleteButton(event)" 
+          onmouseup="handleDeleteButtonRelease(event)" 
+          onmouseleave="handleDeleteButtonRelease(event)" 
+          ontouchstart="handleDeleteButton(event)" 
+          ontouchend="handleDeleteButtonRelease(event)">
+          C
+        </button>
+        <button onclick="calculateBasic()">=</button>
+        <button onclick="appendToBasicInput('/')">/</button>
+      </div>
+    </div>
+
+    <!-- Scientific Calculator -->
+    <div id="scientificCalculator" class="calculator-tool">
+      <h2>Scientific Calculator</h2>
+      <input type="text" id="scientificInput" disabled />
+      <div class="buttons">
+        <button onclick="appendToScientificInput('7')">7</button>
+        <button onclick="appendToScientificInput('8')">8</button>
+        <button onclick="appendToScientificInput('9')">9</button>
+        <button onclick="appendToScientificInput('+')">+</button>
+        <button onclick="appendToScientificInput('4')">4</button>
+        <button onclick="appendToScientificInput('5')">5</button>
+        <button onclick="appendToScientificInput('6')">6</button>
+        <button onclick="appendToScientificInput('-')">-</button>
+        <button onclick="appendToScientificInput('1')">1</button>
+        <button onclick="appendToScientificInput('2')">2</button>
+        <button onclick="appendToScientificInput('3')">3</button>
+        <button onclick="appendToScientificInput('*')">*</button>
+        <button onclick="appendToScientificInput('0')">0</button>
+        <button onclick="clearScientificInput()">C</button>
+        <button onclick="calculateScientific()">=</button>
+        <button onclick="appendToScientificInput('/')">/</button>
+        <button onclick="appendToScientificInput('sqrt(')">√</button>
+        <button onclick="appendToScientificInput('Math.sin(')">sin</button>
+        <button onclick="appendToScientificInput('Math.log(')">log</button>
+        <button onclick="appendToScientificInput('Math.PI')">π</button>
+      </div>
+    </div>
+
+    <!-- Age Calculator -->
+    <div id="ageCalculator" class="calculator-tool">
+      <h2>Age Calculator</h2>
+      <label for="birthDate">Birth Date:</label>
+      <input type="date" id="birthDate" placeholder="Enter your birth date" />
+
+      <label for="todaysDate">Today's Date:</label>
+      <input type="date" id="todaysDate" placeholder="Enter today's date" value="" />
+
+      <button onclick="calculateAge()">Calculate Age</button>
+      <p id="ageResult"></p>
+    </div>
+
+    <!-- Currency Converter -->
+    <div id="currencyConverter" class="calculator-tool">
+      <h2>Currency Converter</h2>
+      <div class="currency-row">
+        <input type="number" id="currencyAmount" placeholder="Enter amount" />
+        <select id="currencyFrom"></select>
+      </div>
+      <div class="currency-row">
+        <input type="text" id="convertedAmount" disabled />
+        <select id="currencyTo"></select>
+      </div>
+      <button onclick="convertCurrency()">Convert</button>
+    </div>
+
+    <!-- BMI Calculator -->
+    <div id="bmiCalculator" class="calculator-tool">
+      <h2>BMI Calculator</h2>
+      <input type="number" id="bmiWeight" placeholder="Weight (kg)" />
+      <input type="number" id="bmiHeight" placeholder="Height (cm)" />
+      <button onclick="calculateBMI()">Calculate BMI</button>
+      <p id="bmiResult"></p>
+    </div>
+
+    <!-- Temperature Converter -->
+    <div id="temperatureConverter" class="calculator-tool">
+      <h2>Temperature Converter</h2>
+      <input type="number" id="tempInput" placeholder="Enter temperature" />
+      <select id="tempFrom">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+        <option value="K">Kelvin</option>
+      </select>
+      <select id="tempTo">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+        <option value="K">Kelvin</option>
+      </select>
+      <button onclick="convertTemperature()">Convert</button>
+      <p id="tempResult"></p>
+    </div>
+
+    <!-- Length Converter -->
+    <div id="lengthConverter" class="calculator-tool">
+      <h2>Length Converter</h2>
+      <input type="number" id="lengthInput" placeholder="Enter length" />
+      <select id="lengthFrom">
+        <option value="m">Meters</option>
+        <option value="km">Kilometers</option>
+        <option value="ft">Feet</option>
+        <option value="mi">Miles</option>
+      </select>
+      <select id="lengthTo">
+        <option value="m">Meters</option>
+        <option value="km">Kilometers</option>
+        <option value="ft">Feet</option>
+        <option value="mi">Miles</option>
+      </select>
+      <button onclick="convertLength()">Convert</button>
+      <p id="lengthResult"></p>
+    </div>
+
+    <!-- Weight Converter -->
+    <div id="weightConverter" class="calculator-tool">
+      <h2>Weight Converter</h2>
+      <input type="number" id="weightInput" placeholder="Enter weight" />
+      <select id="weightFrom">
+        <option value="kg">Kilograms</option>
+        <option value="lb">Pounds</option>
+        <option value="g">Grams</option>
+      </select>
+      <select id="weightTo">
+        <option value="kg">Kilograms</option>
+        <option value="lb">Pounds</option>
+        <option value="g">Grams</option>
+      </select>
+      <button onclick="convertWeight()">Convert</button>
+      <p id="weightResult"></p>
+    </div>
+
+    <!-- Date Difference Calculator -->
+    <div id="dateDifferenceCalculator" class="calculator-tool">
+      <h2>Date Difference Calculator</h2>
+      <label for="startDate">Start Date:</label>
+      <input type="date" id="startDate" />
+
+      <label for="endDate">End Date:</label>
+      <input type="date" id="endDate" />
+
+      <button onclick="calculateDateDifference()">Calculate Difference</button>
+      <p id="dateDifferenceResult"></p>
+    </div>
+
+    <!-- Discount Calculator -->
+    <div id="discountCalculator" class="calculator-tool">
+      <h2>Discount Calculator</h2>
+      <input type="number" id="originalPrice" placeholder="Original Price" />
+      <input type="number" id="discountPercent" placeholder="Discount %" />
+      <button onclick="calculateDiscount()">Calculate</button>
+      <p id="discountResult"></p>
+    </div>
+
+    <!-- Loan/EMI Calculator -->
+    <div id="loanCalculator" class="calculator-tool">
+      <h2>Loan/EMI Calculator</h2>
+      <label for="loanAmount">Loan Amount:</label>
+      <input type="number" id="loanAmount" placeholder="Enter loan amount" />
+
+      <label for="interestRate">Interest Rate (Annual %):</label>
+      <input type="number" id="interestRate" placeholder="Enter annual interest rate" />
+
+      <label for="loanDuration">Loan Duration (Months):</label>
+      <input type="number" id="loanDuration" placeholder="Enter loan Duration in months" />
+
+      <button onclick="calculateEMI()">Calculate EMI</button>
+      <p id="emiResult"></p>
+    </div>
+
+    <!-- Unit Converter -->
+    <div id="unitConverter" class="calculator-tool">
+      <h2>Unit Converter</h2>
+      <input type="number" id="unitInput" placeholder="Enter value" />
+      <select id="unitFrom">
+        <option value="kmh">Speed (km/h)</option>
+        <option value="mph">Speed (mph)</option>
+        <option value="sqm">Area (sq m)</option>
+        <option value="sqft">Area (sq ft)</option>
+        <option value="liters">Volume (liters)</option>
+        <option value="gallons">Volume (gallons)</option>
+        <option value="kb">Data (KB)</option>
+        <option value="mb">Data (MB)</option>
+        <option value="gb">Data (GB)</option>
+      </select>
+      <select id="unitTo">
+        <option value="kmh">Speed (km/h)</option>
+        <option value="mph">Speed (mph)</option>
+        <option value="sqm">Area (sq m)</option>
+        <option value="sqft">Area (sq ft)</option>
+        <option value="liters">Volume (liters)</option>
+        <option value="gallons">Volume (gallons)</option>
+        <option value="kb">Data (KB)</option>
+        <option value="mb">Data (MB)</option>
+        <option value="gb">Data (GB)</option>
+      </select>
+      <button onclick="convertUnit()">Convert</button>
+      <p id="unitResult"></p>
+    </div>
+
+    <div class="modal">
+      <div class="calculator-tool">
+        <span class="close" onclick="closeModal()">×</span>
+        <!-- Modal content -->
+        <h2>Calculator</h2>
+        <p>Perform your calculations here.</p>
+      </div>
+    </div>
+
+  <div id="loadingSpinner" class="spinner" style="display: none;"></div>
+
+
+  <script src="script.js"></script>
+  <script>
+   
+
+    // Add the provided JavaScript code here
+    document.addEventListener("keydown", function (event) {
+      console.log("Key Pressed:", event.key);
+      const basicInput = document.getElementById("basicInput");
+      const scientificInput = document.getElementById("scientificInput");
+      const calculatorModal = document.getElementById("calculatorModal");
+
+      console.log("Modal Display:", calculatorModal.style.display);
+
+      if (calculatorModal.style.display === "block") {
+        // Handle Basic Calculator input
+        if (basicInput && !scientificInput.contains(document.activeElement)) {
+          if (!isNaN(event.key) || ["+", "-", "*", "/"].includes(event.key)) {
+            appendToBasicInput(event.key);
+          } else if (event.key === "Enter") {
+            calculateBasic();
+          } else if (event.key === "Backspace") {
+            basicInput.value = basicInput.value.slice(0, -1);
+          }
+        }
+
+        // Handle Scientific Calculator input
+        if (scientificInput && scientificInput.contains(document.activeElement)) {
+          if (!isNaN(event.key) || ["+", "-", "*", "/", "(", ")"].includes(event.key)) {
+            appendToScientificInput(event.key);
+          } else if (event.key === "Enter") {
+            calculateScientific();
+          } else if (event.key === "Backspace") {
+            scientificInput.value = scientificInput.value.slice(0, -1);
+          }
+        }
+
+        // Handle Esc key to return to the main menu
+        if (event.key === "Escape") {
+          closeCalculator();
+        }
+      }
+    });
+
+    function appendToBasicInput(value) {
+      const basicInput = document.getElementById("basicInput");
+      basicInput.value += value;
+    }
+
+    function appendToScientificInput(value) {
+      const scientificInput = document.getElementById("scientificInput");
+      scientificInput.value += value;
+    }
+
+    function closeCalculator() {
+      console.log("Closing Calculator");
+      const calculatorModal = document.getElementById("calculatorModal");
+      calculatorModal.style.display = "none";
+    }
+
+    function openCalculator(calculatorId) {
+      const calculatorModal = document.getElementById("calculatorModal");
+      calculatorModal.style.display = "block";
+
+      const calculators = document.querySelectorAll(".calculator-tool");
+      calculators.forEach((calc) => (calc.style.display = "none"));
+
+      const selectedCalculator = document.getElementById(calculatorId);
+      if (selectedCalculator) {
+        selectedCalculator.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
